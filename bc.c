@@ -66,10 +66,10 @@ int main()
   dp->s2 = 0;             // high 4-byte address s2=0
 
   getSector((u32)0, (u16)mbr); // get MBR
-  ==================================================
-     In the MBR, partition table begins at 0x1BE
-  // DO:#1  WRITE C CODE TO PRINT THE PARTITIONS
-  ==================================================
+//  ==================================================
+//     In the MBR, partition table begins at 0x1BE
+//     DO:#1  WRITE C CODE TO PRINT THE PARTITIONS
+//  ==================================================
   color = CYAN;
   while(1){
     printf("what's your name? ");
