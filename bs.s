@@ -1,6 +1,6 @@
 !---------------------- bs.s file -------------------------------------------
          BOOTSEG  = 0x9000
-	 SSP      = 32*1024
+		   SSP      = 32*1024
 	
         .globl _main, _prints,_color,_dap        ! IMPORT 
         .globl _diskr,_getc,_putc,_error         ! EXPORT
@@ -17,7 +17,7 @@
         mov  dx,#0x0080     ! dh=head=0, dL=0x80=HD or USB's MBR
         xor  cx,cx
         incb cl             ! cyl 0, sector 1
-	incb cl             ! cyl 0, sector 2 
+		  incb cl             ! cyl 0, sector 2 
         mov  ax, #0x0220    ! READ 16 sectors (booter<8KB)
         int  0x13
 
@@ -31,18 +31,18 @@ next:
         mov  sp,#SSP        ! 32 KB stack
 !-------------------------------------------------------------	
         mov  ax,#0x0012     ! Call BIOS for 640x480 color mode     
-	int  0x10
+		  int  0x10
 !------------------------------------------------------------
         call _main          ! call main() in C
      
         test ax, ax         ! check return value from main()
         je   _error         ! main() return 0 if error
 
-        jmpi 0, 0x1000
+        jmpi 0, 0x1000      ! jump to the start of the OS kernal
 
-        !---------------------------------------------
-        !  char getc( )   function: returns a char
-        !---------------------------------------------
+		!---------------------------------------------
+		!  char getc( )   function: returns a char
+		!---------------------------------------------
 _getc:
         xorb   ah,ah           ! clear ah
         int    0x16            ! call BIOS to get a char in AX
@@ -54,7 +54,7 @@ _getc:
         !----------------------------------------------
 _putc:           
         push   bp
-	mov    bp,sp
+		mov    bp,sp
 
         movb   al,4[bp]        ! get the char into aL
         movb   ah,#14          ! aH = 14
@@ -62,7 +62,7 @@ _putc:
         int    0x10            ! call BIOS to display the char
 
         pop    bp
-	ret
+		ret
         
         
         !------------------------------
@@ -86,11 +86,11 @@ msg:   .asciz  "\n\rError!\n\r"
 	
 ! diskr(): read disk sectors specified by _dap in C code		
 _diskr: 
-         mov dx, #0x0080
+     mov dx, #0x0080
 	 mov ax, #0x4200
 	 mov si, #_dap
 
-         int 0x13               ! call BIOS to read the block 
-         jb  _error             ! to error() if CarryBit is on [read failed]
+     int 0x13               ! call BIOS to read the block 
+     jb  _error             ! to error() if CarryBit is on [read failed]
 	 ret
 
