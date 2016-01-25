@@ -16,5 +16,7 @@ strcmp()
 int gets(char s[64])
 {
 	while (getc() != "")
+	{
+	}
 
 }
