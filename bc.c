@@ -76,15 +76,20 @@ int main()
 //     DO:#1  WRITE C CODE TO PRINT THE PARTITIONS
 //  ==================================================
 	color = CYAN;
-	//while(1)
-	//{
+	prints("test: ");
+	gets(ans);
+	prints(ans);
+	prints("\n\rshould have printed ans\n\r");
+
+	/*while(1)
+	{
 		prints("what's your name? ");
    	gets(ans);
     	if (strcmp(ans, "quit")==0)
 		{
       	printf("\n\rexit main()\n\r");
-	//      break;
+	      break;
    	}
     	printf("\n\rWelcome %s!\n\r", ans);
-  	//}
+  	}*/
 }
