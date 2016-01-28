@@ -1,7 +1,30 @@
+#include "io.h"
 
-char *ctable = "1234";
+int rpu(u8 x)
+{
+	char c;
+   if (x)
+	{
+		c = table[x % BASE];
+		rpu(x / BASE);
+		putc(c);
+	}
+} 
 
-printf()
+int printu(u8 x)
+{
+	if (x==0)
+	{
+		putc('0');
+	}
+	else
+	{
+		rpu(x);
+	}
+	putc(' ');
+}
+
+int printf()
 {}
 
 int prints(char *s)
@@ -39,4 +62,5 @@ int gets(char s[64])
 	//add \n
 	s[i] = '\n';
 	s[i+1] = '\r';
+	s[i+2] = 0;
 }

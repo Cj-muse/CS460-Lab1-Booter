@@ -3,7 +3,7 @@
 # Compile bs.s bc.c
 	echo compiling...
 	as86 -o bs.o  bs.s
-	bcc -c -ansi  bc.c
+	bcc -c -ansi  bc.c 
 	bcc -c -ansi  io.c
 	ld86 -d bs.o bc.o io.o /usr/lib/x86_64-linux-gnu/libc.a
 
