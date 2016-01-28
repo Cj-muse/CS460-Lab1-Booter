@@ -6,7 +6,12 @@ printf()
 
 int prints(char *s)
 { 
-	while(*s) putc(*s++); 
+	int i = 0;
+	while(s[i])
+	{
+		putc(s[i]);
+		i++;
+	}
 }
 
 strcmp()
