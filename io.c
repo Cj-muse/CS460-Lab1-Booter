@@ -1,31 +1,85 @@
 #include "io.h"
 
-int rpu(u8 x)
+int rpu(u32 x)
 {
-	char c;
-   if (x)
-	{
-		c = table[x % BASE];
-		rpu(x / BASE);
-		putc(c);
-	}
+  char c;
+  if (x)
+    {
+      c = table[x % BASE];
+      rpu(x / BASE);
+      putc(c);
+    }
 } 
 
-int printu(u8 x)
+int printu(u32 x)
 {
-	if (x==0)
-	{
-		putc('0');
-	}
-	else
-	{
-		rpu(x);
-	}
-	putc(' ');
+  if (x==0)
+    putc('0');
+  else
+    BASE = 10;
+    rpu(x);
 }
 
-int printf()
-{}
+int printd(int x) //prints an integer
+{
+  if (x == 0)
+    putc('0');
+  else
+   BASE = 10;
+   rpu(x); 
+}
+
+int printo(u32 x) //prints x in OCTal
+{
+  if (x == 0 )
+    putc(' ');
+  else
+    BASE = 8;
+    rpu(x);
+} 
+
+int printx(u32 x) //prints x in hex
+{
+  if (x == 0 )
+    putc('0');
+  else
+    BASE = 16;
+    rpu(x);
+} 
+
+void printf(char *fmt, ...)
+{
+	//u16 *ip
+	int *ip = (u16 *)&fmt + 1;
+  	int i = 0;
+  	char *cp = fmt;
+
+  	//asm("mov ebp, FP");
+  	//ip = FP + 3;
+  	
+	for(i = 0; fmt[i]; i++)
+  	{
+		if (fmt[i] == '%')
+		{
+	  		i++;
+			switch(fmt[i])
+			{
+				case'c': putc(*ip);   ip++;break;
+				case's': prints(*ip); ip++;break;
+				case'u': printu(*ip); ip++;break;
+				case'd': printd(*ip); ip++;break;
+				case'o': printo(*ip); ip++;break;
+				case'x': printx(*ip); ip++;break;
+				default: putc(fmt[i]);ip++;break;
+		  	}	  
+	 	}
+      else
+		{
+			putc(fmt[i]);
+		}
+	}
+}
+
 
 int prints(char *s)
 { 

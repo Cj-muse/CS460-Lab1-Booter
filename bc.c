@@ -10,7 +10,7 @@ int getSector(u32 sector, char *addr)
 
 int main()
 {
-   int i;
+   int i = 0;
    struct partition *p;
    prints("booter start in main()\n\r");
 
@@ -38,24 +38,19 @@ int main()
 
 	//get to offset 0x1BE
 	p = dp->addr + 0x1be;
-	
-	//print out partition
-	prints("head: ");
-	printu(p->head); 
-	prints("\n");
-
-
-	//gets(ans);
-	//prints(ans);
-	/*while(1)
+	while (i < 4)
 	{
-		prints("what's your name? ");
-   	gets(ans);
-    	if (strcmp(ans, "quit")==0)
-		{
-      	printf("\n\rexit main()\n\r");
-	      break;
-   	}
-    	printf("\n\rWelcome %s!\n\r", ans);
-  	}*/
+		//print out partition
+		printf("Partition %d \n\r", i);
+		//prints("Head: ");  				printu(p->head);				prints("\n\r");
+		//prints("Sector: ");				printu(p->sector); 			prints("\n\r");
+		//prints("Cylinder: ");			printu(p->cylinder); 		prints("\n\r");
+		prints("Type: ");					printd(p->type); 				prints("\n\r");
+		prints("Start Sector: ");		printd(p->start_sector);	prints("\n\r");
+		prints("Number of Sectors: ");printd(p->nr_sectors);		prints("\n\r");
+		prints("\n\r");
+		// move to next partition
+		p++;
+		i++;
+	}
 }

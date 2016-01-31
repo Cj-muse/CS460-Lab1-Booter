@@ -38,6 +38,8 @@ struct dap dap, *dp;       // global dap struct
 u16 color = RED;           // initial color for putc()
 
 int BASE = 10;
+int *FP;
+
 char *table = "0123456789ABCDEF";
 
 #define  BOOTSEG 0x9000
